@@ -1,0 +1,204 @@
+# Fibrillin (FBN1/FBN2/FBN3) expression across developing human and zebrafish heart
+
+## What this is (read before the figures)
+
+This repository does not contain a downloaded spatial transcriptomics count
+matrix. In this session, outbound network access to the hosts that hold the
+primary data — NCBI/PubMed/PMC, ScienceDirect, bioRxiv, the Human Protein
+Atlas, ZFIN, Mendeley Data — was blocked by the sandbox's organization egress
+policy (`CONNECT tunnel failed, response 403` at the proxy level, confirmed
+with both the WebFetch tool and raw `curl`). Web *search* (snippet-level)
+was available and was used to reconstruct what those sources report.
+
+So: `data/*.csv` and `figures/*.png` here are a **qualitative, citation-backed
+literature synthesis**, not a re-analysis of the raw Asp et al. 2019 spatial
+transcriptomics data, HPA nTPM tables, or ZFIN in-situ records. Every row in
+the data tables has a `citation` column. Relative expression is scored on an
+ordinal 0-3 scale (undetected / low / moderate / high) inferred from
+descriptive statements in the literature (e.g. "highest expression in fetal
+tissues," "same temporospatial pattern as FBN1," "expression concentrated in
+the AVC by 60-72 hpf") — it is **not** a normalized read count. Treat the
+figures as a structured hypothesis/summary to guide a targeted look at the
+real datasets, listed in [Getting the primary data yourself](#getting-the-primary-data-yourself) below.
+
+## The three fibrillins, briefly
+
+FBN1, FBN2 and FBN3 encode fibrillins, large glycoproteins that polymerize
+into extracellular-matrix microfibrils and scaffold elastic fibers and TGF-β
+storage. They differ in temporal pattern:
+
+- **FBN1** — expressed throughout life; the classic Marfan syndrome gene;
+  broadly distributed in stromal/ECM-producing cells, smooth muscle, and
+  valve interstitial cells (Human Protein Atlas tissue summary; [PMC10806136](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10806136/)).
+- **FBN2** — developmentally restricted; in early embryonic organs (skin,
+  lung, heart, aorta, CNS anlage, nerves, ganglia) FBN1 and FBN2 "followed the
+  same temporospatial pattern of distribution," but FBN2 declines postnatally
+  ([PMC10806136](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10806136/)).
+- **FBN3** — the most developmentally restricted: "evenly expressed" across
+  numerous tissues from the 6th to 12th gestational week, then downregulated
+  to low postnatal levels; uniquely high in brain among adult tissues; **has
+  no functional ortholog in rodents**, but is present in primates, cow,
+  sheep, dog, swine, chick, and zebrafish ([PMID 20970500, Fibrillin-3
+  expression in human development](https://pubmed.ncbi.nlm.nih.gov/20970500/)).
+  This last point is why zebrafish — not mouse — is the standard model for
+  studying FBN3/fbn3 function in vivo.
+
+## Human heart: timeline across developmental stages and layers
+
+Figures: `figures/fig1_human_fibrillin_by_layer.png`,
+`figures/fig2_human_endocardium_focus.png`
+
+Stages follow the three time points used by the primary human developmental
+heart spatial transcriptomics atlas, **Asp et al. 2019, Cell**, "A
+Spatiotemporal Organ-Wide Gene Expression and Cell Atlas of the Developing
+Human Heart" ([PMID 31835037](https://pubmed.ncbi.nlm.nih.gov/31835037/),
+[ScienceDirect](https://www.sciencedirect.com/science/article/pii/S0092867419312826),
+raw ST/ISS/scRNA-seq data on [Mendeley Data](https://data.mendeley.com/datasets/dgnysc3zn5/1)),
+plus flanking stages from classical cardiac embryology and later single-cell/
+spatial extensions (Farah et al. 2024 cardiomyocyte-diversity paper at 6.5-7
+PCW; a 2024 multi-omic atlas spanning 4-20 PCW).
+
+Key pattern, **endocardium-focused** (your stated interest):
+
+1. **3.5-4.5 PCW** — linear heart tube / looping. All three fibrillins are low;
+   the endocardium is a simple squamous epithelium, not yet making much ECM.
+2. **~5 PCW** — endocardial cushions begin forming in the AV canal and
+   outflow tract via **endocardial-to-mesenchymal transition (EndMT)**:
+   endocardial cells delaminate, invade the cushion, and become
+   ECM-secreting mesenchyme ([PMC4760315](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4760315/),
+   [ScienceDirect: Endocardial Cushion overview](https://www.sciencedirect.com/topics/medicine-and-dentistry/endocardial-cushion)).
+   This is the inflection point where FBN1/2/3 all start rising in the
+   endocardial compartment — fibrillin is a product of the post-EndMT
+   mesenchyme, not resting endothelium.
+3. **6.5-12 PCW** — all three genes peak in endocardium/cushion-derived valve
+   mesenchyme. FBN3 in particular sits inside its literature-reported "evenly
+   expressed 6th-12th gestational week" window.
+4. **>12 PCW → term** — FBN1 stays high (lifelong gene); FBN2 declines
+   gradually; **FBN3 drops sharply**, consistent with its reported postnatal
+   downregulation.
+5. Myocardium and epicardium stay comparatively low for all three genes
+   throughout — fibrillins are matrix/mesenchymal-cell products, and
+   cardiomyocytes are not a strong fibrillin-producing population per the
+   Human Protein Atlas tissue/cell-type data ("membranous and cytoplasmic
+   expression in extracellular matrix, stromal cells, smooth muscle cells").
+
+## Zebrafish heart: timeline across developmental stages and layers
+
+Figure: `figures/fig3_zebrafish_fibrillin_by_layer.png`
+
+Zebrafish carries three fibrillin genes — **fbn1, fbn2** (renamed from
+*fbn2a*), **fbn3** (renamed from *fbn2b*, based on phylogenetics/synteny with
+human FBN3) — per the 2025 systematic-disruption study
+([bioRxiv 10.1101/2025.06.21.659830](https://www.biorxiv.org/content/10.1101/2025.06.21.659830.full.pdf)).
+
+The best-characterized gene by far, in the endocardium specifically, is
+**fbn3 (fbn2b)**:
+
+- **~48 hpf** — endocardial Notch signaling (the pathway fbn3/pku300 act
+  through) activates in the AVC and ventricular endocardium.
+- **60-72 hpf (2.5-3 dpf)** — Notch signaling concentrates in the AVC;
+  fbn3/pku300 are required there for **endocardial cell proliferation,
+  adhesion, and tight-junction formation** — i.e., directly for endocardial
+  cushion/valve morphogenesis (Wang et al. 2013, *J Cell Sci*,
+  [PMC3644139](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3644139/), "Genetic
+  interaction between pku300 and fbn2b controls endocardial cell
+  proliferation and valve development in zebrafish").
+- **4-9 dpf** — in *fbn3⁻/⁻* larvae, this is the window where endocardial
+  integrity fails: progressive **endocardial detachment in the atrium**,
+  pericardial edema, and in severely affected larvae, death at 6-9 dpf from
+  blood-flow obstruction. Milder mutants survive to adulthood with a dilated
+  bulbus arteriosus (the zebrafish equivalent of the human aortic root) and
+  valvular defects — a Marfan-like cardiovascular phenotype
+  ([bioRxiv 10.1101/2025.06.21.659830](https://www.biorxiv.org/content/10.1101/2025.06.21.659830.full.pdf)).
+  Notably, **only the fbn3 mutant** among the three single fibrillin mutants
+  showed this overt cardiovascular phenotype in that study.
+- fbn1 and fbn2 are expressed across the same 1-7 dpf window (established by
+  qPCR in the original 2013 paper) but are less well characterized as
+  endocardium-specific; they are shown with lower confidence (flatter,
+  low-moderate) in the data/figures for that reason.
+
+## Correlating zebrafish stages to human developmental weeks
+
+Figures: `figures/fig4_species_stage_correlation.png`,
+`figures/fig5_endocardium_cross_species_overlay.png`
+Data: `data/species_stage_correlation.csv`
+
+The correspondence below is **by shared morphogenetic milestone** (same
+biological event, not a molecular clock or literal time scaling — zebrafish
+hearts form over hours/days, human hearts over weeks):
+
+| Shared process | Zebrafish stage | Human equivalent |
+|---|---|---|
+| Cardiac progenitor differentiation / cardiac crescent | 12-15 somites (~16 hpf) – 24 hpf | ~3-3.5 PCW |
+| Heart tube looping | 24-48 hpf | ~4-5 PCW |
+| Endocardial cushion formation / EndMT onset | 48-72 hpf (2-3 dpf) | ~5-6.5 PCW |
+| Valve leaflet formation / cushion remodeling, trabeculation | 3-5 dpf | ~6.5-9 PCW |
+| Valve/endocardial integrity maturation, chamber septation completion | 5-9 dpf | ~9-12 PCW |
+| Post-embryonic / fetal structural maturation | 10 dpf – ~30-90 dpf (juvenile) | ~12 PCW – term/postnatal |
+
+Sources for the milestone timings: Bakkers 2011, *Cardiovasc Res* 91:279,
+"Zebrafish as a model to study cardiac development and human cardiac disease"
+([PMC3125074](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3125074/)); "From
+Stripes to a Beating Heart" review
+([PMC7916704](https://pmc.ncbi.nlm.nih.gov/articles/PMC7916704/)); "A
+pictorial account of the human embryonic heart between 3.5 and 8 weeks"
+([PMC8917235](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8917235/)); "Post-
+Embryonic Heart Development and Maturation in Zebrafish"
+([PMC4446259](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4446259/)).
+
+When endocardial FBN3 (human) / fbn3 (zebrafish) expression is plotted
+against these aligned milestones (fig5), both curves show the same shape:
+low before cushion formation, peaking through cushion/valve morphogenesis and
+early maturation, then declining once the endocardium's ECM
+scaffold/valve architecture is largely built. This is the strongest, most
+directly evidenced cross-species link in this analysis, because **fbn3 is
+the only one of the three fibrillins with a documented, endocardium-specific
+loss-of-function phenotype** (endocardial detachment) in either species —
+and because mouse cannot be used for this comparison at all (no functional
+Fbn3 ortholog), zebrafish is the primary in vivo model for this gene.
+
+## Caveats
+
+- Values are ordinal, literature-derived estimates, not measured expression;
+  treat trends (rising/falling, relative ranking of genes/layers) as more
+  reliable than exact levels.
+- FBN2/FBN3 data points for myocardium/epicardium in both species are lower-
+  confidence extrapolations (fibrillins are broadly ECM/mesenchymal-cell
+  products; layer-specific reports are sparser than for endocardium).
+- The human-zebrafish stage correspondence is a standard comparative-
+  embryology device (shared morphogenetic milestones), not a validated
+  molecular timeline alignment.
+- FBN1/FBN2 in zebrafish endocardium specifically (as opposed to whole
+  embryo) are less well documented in the literature surfaced here than
+  fbn3; corresponding figure lines are drawn flatter/lower-confidence.
+
+## Getting the primary data yourself
+
+If you want actual counts rather than this literature synthesis:
+
+- **Human**: Asp et al. 2019 raw ST/ISS/scRNA-seq data and processed
+  expression matrices — [Mendeley Data (dgnysc3zn5)](https://data.mendeley.com/datasets/dgnysc3zn5/1)
+  and the paper's [online spatial viewer](https://www.sciencedirect.com/science/article/pii/S0092867419312826).
+  Human Protein Atlas single-cell/tissue pages for exact nTPM values:
+  [FBN1](https://www.proteinatlas.org/ENSG00000166147-FBN1/single+cell+type),
+  [FBN2](https://proteinatlas.org/ENSG00000138829-FBN2/single+cell+type),
+  [FBN3](https://www.proteinatlas.org/ENSG00000142449-FBN3).
+- **Zebrafish**: [ZFIN](https://zfin.org/) gene pages for `fbn1`, `fbn2`,
+  `fbn3` (search current nomenclature — `fbn3` was formerly `fbn2b`) have
+  curated in-situ expression records by stage. The 2025 Marfan-model paper's
+  RNA-seq data is deposited as [GEO GSE300393](https://www.omicsdi.org/dataset/geo/GSE300393).
+- This session could not reach any of the above (egress policy blocked
+  ncbi.nlm.nih.gov, sciencedirect.com, biorxiv.org, proteinatlas.org, zfin.org,
+  data.mendeley.com, eutils.ncbi.nlm.nih.gov — confirmed via both the WebFetch
+  tool and a direct `curl`, `CONNECT tunnel failed, response 403`). If you run
+  this analysis in an environment with broader network access, re-fetching
+  and replacing `data/*.csv` with real quantitative values would be the
+  natural next step; `scripts/plot_fibrillin_timelines.py` will plot whatever
+  is in those CSVs unchanged.
+
+## Reproducing the figures
+
+```
+pip install matplotlib pandas numpy
+python3 scripts/plot_fibrillin_timelines.py
+```
