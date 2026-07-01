@@ -229,15 +229,43 @@ Fbn3 ortholog), zebrafish is the primary in vivo model for this gene.
 
 If you want actual counts rather than this literature synthesis:
 
-- **Human**: Asp et al. 2019 raw ST/ISS/scRNA-seq data and processed
-  expression matrices — [Mendeley Data (dgnysc3zn5)](https://data.mendeley.com/datasets/dgnysc3zn5/1)
-  and the paper's [online spatial viewer](https://www.sciencedirect.com/science/article/pii/S0092867419312826).
-  For PCW 5.5-14 (fills the gap Asp et al. doesn't cover), use Lázár et al.
-  2025 — [Nature Genetics](https://www.nature.com/articles/s41588-025-02352-6)
-  / [open-access PMC copy](https://pmc.ncbi.nlm.nih.gov/articles/PMC12597827/) —
-  check its Data Availability statement for the deposited spot/cell count
-  matrices and ISS panel.
-  Human Protein Atlas single-cell/tissue pages for exact nTPM values:
+### Lázár et al. 2025 (Nature Genetics) — the recommended source for PCW 5.5-14
+
+The corresponding authors have deposited the full processed dataset. Per the
+paper's Data Availability statement (reproduced here as given by the user,
+since this session cannot browse to it directly):
+
+- **Mendeley Data, part 1**: Cell Ranger output, Space Ranger output,
+  metadata, processed ISS data, supplementary figures/tables, and main RDS
+  objects — DOI [10.17632/fhtb99mdzd.1](https://doi.org/10.17632/fhtb99mdzd.1)
+  / <https://data.mendeley.com/datasets/fhtb99mdzd/1>
+- **Mendeley Data, part 2**: DOI [10.17632/w65jtfsvpr.1](https://doi.org/10.17632/w65jtfsvpr.1)
+  / <https://data.mendeley.com/datasets/w65jtfsvpr/1>
+- **Interactive browser** (no download needed to check FBN1/2/3 by eye):
+  <https://hdcaheart.serve.scilifelab.se/web/index.html> — lets you browse
+  Visium, scRNA-seq, and ISS gene expression, clustering, and other results
+  directly; the site has its own usage instructions.
+- **Raw sequencing** (controlled access, formal request required): single-cell
+  at EGA study [EGAS50000001029](https://ega-archive.org/studies/EGAS50000001029),
+  spatial transcriptomics at EGA study
+  [EGAS50000001122](https://ega-archive.org/studies/EGAS50000001122). Raw ISS
+  images are available from the corresponding authors on reasonable request
+  (not deposited, per the paper).
+
+For a direct FBN1/FBN2/FBN3-in-endocardium answer, the **interactive
+browser is the fastest path** — search each gene, filter/select the
+endocardium or endocardial-cushion/valve-mesenchyme cell states, and read
+off expression across the PCW 5.5-14 samples.
+
+### Asp et al. 2019 (Cell) — PCW ~4.5-9
+
+Raw ST/ISS/scRNA-seq data and processed expression matrices —
+[Mendeley Data (dgnysc3zn5)](https://data.mendeley.com/datasets/dgnysc3zn5/1)
+and the paper's [online spatial viewer](https://www.sciencedirect.com/science/article/pii/S0092867419312826).
+
+### Other sources used in this analysis
+
+- Human Protein Atlas single-cell/tissue pages for exact nTPM values:
   [FBN1](https://www.proteinatlas.org/ENSG00000166147-FBN1/single+cell+type),
   [FBN2](https://proteinatlas.org/ENSG00000138829-FBN2/single+cell+type),
   [FBN3](https://www.proteinatlas.org/ENSG00000142449-FBN3).
@@ -245,14 +273,27 @@ If you want actual counts rather than this literature synthesis:
   `fbn3` (search current nomenclature — `fbn3` was formerly `fbn2b`) have
   curated in-situ expression records by stage. The 2025 Marfan-model paper's
   RNA-seq data is deposited as [GEO GSE300393](https://www.omicsdi.org/dataset/geo/GSE300393).
-- This session could not reach any of the above (egress policy blocked
-  ncbi.nlm.nih.gov, sciencedirect.com, biorxiv.org, proteinatlas.org, zfin.org,
-  data.mendeley.com, eutils.ncbi.nlm.nih.gov — confirmed via both the WebFetch
-  tool and a direct `curl`, `CONNECT tunnel failed, response 403`). If you run
-  this analysis in an environment with broader network access, re-fetching
-  and replacing `data/*.csv` with real quantitative values would be the
-  natural next step; `scripts/plot_fibrillin_timelines.py` will plot whatever
-  is in those CSVs unchanged.
+
+### Why none of this is already pulled into `data/*.csv`
+
+This session's outbound network access is governed by an organization
+egress policy that explicitly denies every one of the above hosts —
+`data.mendeley.com`, `doi.org`, `hdcaheart.serve.scilifelab.se`,
+`ega-archive.org`, plus `ncbi.nlm.nih.gov`, `sciencedirect.com`,
+`biorxiv.org`, and `proteinatlas.org` from earlier checks. Each was
+re-confirmed via the proxy's own status log as an explicit
+`connect_rejected` / "gateway answered 403 to CONNECT (policy denial)",
+not a transient network error — so retrying or working around it isn't
+appropriate here.
+
+**If you (or anyone with normal, unrestricted network access) can open the
+interactive browser or download the Mendeley RDS objects and pull actual
+FBN1/FBN2/FBN3 values by cell state and stage** — even just pasted numbers,
+a screenshot of the browser's expression view, or an exported CSV — paste
+them into the conversation and this analysis can be redone with real
+measured data: `data/human_fibrillin_expression.csv` swapped for real
+values and `scripts/plot_fibrillin_timelines.py` re-run unchanged to
+regenerate all figures.
 
 ## Reproducing the figures
 
