@@ -82,6 +82,59 @@ Key pattern, **endocardium-focused** (your stated interest):
    Human Protein Atlas tissue/cell-type data ("membranous and cytoplasmic
    expression in extracellular matrix, stromal cells, smooth muscle cells").
 
+## A newer, higher-resolution atlas: Lázár et al. 2025 (Nature Genetics)
+
+Since the first version of this analysis, the user pointed to
+[Lázár et al. 2025, *Nature Genetics*, "Spatiotemporal gene expression and
+cellular dynamics of the developing human heart"](https://www.nature.com/articles/s41588-025-02352-6)
+(open access on PMC: [PMC12597827](https://pmc.ncbi.nlm.nih.gov/articles/PMC12597827/);
+commentary: [Iwamoto-Stohl & Bruneau 2025](https://www.nature.com/articles/s41588-025-02261-8)).
+This is the direct successor to Asp et al. 2019 from a related group, and it
+is a substantially bigger, later-stage dataset:
+
+- **36 hearts spanning PCW 5.5-14** (Asp et al. 2019 covered ~4.5-9 PCW), so
+  it directly fills the 9-14 PCW gap that this analysis' human table had to
+  extrapolate.
+- 69,114 spatially barcoded spots + 76,991 dissociated cells + targeted in
+  situ sequencing (ISS) of a 150-gene panel.
+- 23 molecular tissue compartments; 11 primary cell types resolved into 72
+  fine-grained cell states, spatially mapped into functional cardiac niches.
+- New biology reported: development of the pacemaker-conduction system,
+  autonomic innervation, heart valves and the atrial septum, and unexpected
+  diversity among cardiac mesenchymal cells.
+- Concrete, spatially-validated markers for valve/cushion-related
+  populations (relevant context for endocardium/EndMT, even though these are
+  not fibrillin genes themselves): endocardial-cushion cells marked by
+  **LEF1 + MSX1** (proposed causal role in atrial septal defects), valve
+  interstitial cells marked by **APCDD1, LEF1, TMEM132C, ADAMTS19**, and a
+  "Valve_MC_1" population marked by **FGF14, HDAC9, PLCXD3**.
+
+**What I could not confirm:** whether FBN1, FBN2 or FBN3 specifically appear
+in this paper's 150-gene ISS panel or in its marker-gene tables for
+endocardium/valve-mesenchyme cell states. `nature.com`, `pmc.ncbi.nlm.nih.gov`,
+`biorxiv.org`, `researchgate.net` and `sciencedirect.com` were all blocked by
+this session's egress policy (same `CONNECT tunnel failed, response 403` as
+before, re-confirmed for this paper specifically), so I could only work from
+search-engine snippets, not the paper's own text, figures, or supplementary
+tables. None of the snippets I found named FBN1/2/3 in this paper's marker
+lists. **This is a genuine gap, not a "no" answer** — if you (or anyone with
+normal browser access) can open the PMC link above, the fastest checks would
+be: (1) search the full text for "FBN1", "FBN2", "FBN3", or "fibrillin"; (2)
+check Supplementary Table listing the 150 ISS panel genes; (3) check the
+marker-gene tables for the endocardial-cushion (LEF1+MSX1) and valve-
+mesenchyme cell states. A related, even newer dataset worth the same check is
+["MERFISH+, a large-scale, multi-omics spatial technology resolves the
+molecular holograms of the 3D human developing heart"](https://www.biorxiv.org/content/10.1101/2025.11.02.686137v1)
+(bioRxiv, Nov 2025; >3.1 million cells at subcellular resolution in 3D).
+
+One additional literature point this search surfaced that reinforces the
+endocardium/FBN3 link used throughout this analysis: fibrillin-3 protein has
+been localized "at the prospective basement membranes in developing
+epithelia **and endothelia**," across tissues including heart
+([PMID 20970500](https://pubmed.ncbi.nlm.nih.gov/20970500/)) — endocardium
+is itself an endothelium, so this is a direct (if not heart-specific)
+mechanistic tie-in for why FBN3 shows up there.
+
 ## Zebrafish heart: timeline across developmental stages and layers
 
 Figure: `figures/fig3_zebrafish_fibrillin_by_layer.png`
@@ -179,6 +232,11 @@ If you want actual counts rather than this literature synthesis:
 - **Human**: Asp et al. 2019 raw ST/ISS/scRNA-seq data and processed
   expression matrices — [Mendeley Data (dgnysc3zn5)](https://data.mendeley.com/datasets/dgnysc3zn5/1)
   and the paper's [online spatial viewer](https://www.sciencedirect.com/science/article/pii/S0092867419312826).
+  For PCW 5.5-14 (fills the gap Asp et al. doesn't cover), use Lázár et al.
+  2025 — [Nature Genetics](https://www.nature.com/articles/s41588-025-02352-6)
+  / [open-access PMC copy](https://pmc.ncbi.nlm.nih.gov/articles/PMC12597827/) —
+  check its Data Availability statement for the deposited spot/cell count
+  matrices and ISS panel.
   Human Protein Atlas single-cell/tissue pages for exact nTPM values:
   [FBN1](https://www.proteinatlas.org/ENSG00000166147-FBN1/single+cell+type),
   [FBN2](https://proteinatlas.org/ENSG00000138829-FBN2/single+cell+type),
