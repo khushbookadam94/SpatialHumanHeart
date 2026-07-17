@@ -210,6 +210,61 @@ loss-of-function phenotype** (endocardial detachment) in either species —
 and because mouse cannot be used for this comparison at all (no functional
 Fbn3 ortholog), zebrafish is the primary in vivo model for this gene.
 
+## CDH5 (VE-cadherin): the endothelial-identity counterpoint in endocardium
+
+Figures: `figures/fig6_human_cdh5_by_layer.png`, `figures/fig7_zebrafish_cdh5_by_layer.png`,
+`figures/fig8_endocardium_cdh5_cross_species_overlay.png`,
+`figures/fig9_endocardium_cdh5_vs_fbn_contrast.png`
+Data: `data/human_cdh5_expression.csv`, `data/zebrafish_cdh5_expression.csv`
+
+CDH5 (VE-cadherin/CD144) is the core endothelial adherens-junction protein
+and is endothelial-specific — since endocardium *is* an endothelium, CDH5 is
+a pan-endocardial identity marker, structurally the opposite kind of gene
+from the fibrillins (ECM secreted by post-EndMT mesenchyme).
+
+Pattern, same layer/stage structure as the fibrillin analysis:
+
+- **Constitutively high in endocardium from the earliest stages** (human
+  ~3.5 PCW; zebrafish CDH5+ cells coalesce into a ring of endocardial
+  precursors in the heart cone by ~16 hpf) — [Larson et al. 2004, *Dev Dyn*,
+  "Expression of VE-cadherin in zebrafish embryos: a new tool to evaluate
+  vascular development"](https://anatomypubs.onlinelibrary.wiley.com/doi/10.1002/dvdy.20102).
+- **Undetectable in myocardium** at every stage in both species (endothelial-
+  specific gene, not expressed in cardiomyocytes) — [ScienceDirect Topics:
+  Vascular Endothelial Cadherin overview](https://www.sciencedirect.com/topics/neuroscience/vascular-endothelial-cadherin).
+- **Transient dip during EndMT/cushion formation, in both species** — this
+  is the direct opposite of the fibrillin pattern and is the most literature-
+  supported point in this dataset: Notch-driven Snail1/Snail2 upregulation
+  represses CDH5 in the delaminating endocardial subpopulation
+  ([PMC2776235, Akt promotes Endocardial-Mesenchyme Transition](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2776235/);
+  [PMC8041771, Sox7/Wnt4/Bmp2 in AV cushion formation](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8041771/)).
+  In zebrafish this has a precise, directly reported timing: **"CDH5 is
+  expressed in the whole heart at 48 hpf, then downregulated and restricted
+  in the AVC of wild-type hearts from 60-72 hpf"**
+  ([PMC6982417, Uncovering the Molecular and Cellular Mechanisms of Heart
+  Development Using Zebrafish](https://pmc.ncbi.nlm.nih.gov/articles/PMC6982417/);
+  see also [PMC8147271, The Zebrafish Cardiac Endothelial Cell](https://pmc.ncbi.nlm.nih.gov/articles/PMC8147271/)
+  and [PMC6739419, Cdh5/Yap1-mediated endocardial mechanotransduction](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6739419/)).
+- **Recovers to high once cushions remodel into valve leaflets** as the
+  epithelial/endothelial lining re-seals over the (now mesenchymal) valve
+  interior, in both species.
+- Epicardium is low/undetectable for CDH5 until coronary vasculogenesis
+  begins (~6.5-9 PCW in human), at which point coronary vessel endothelium
+  embedded within epicardium-derived tissue contributes a low signal — not
+  the mesothelial epicardial cells themselves.
+
+**Fig9 makes the point directly**: plotted against FBN1/2/3 in the same
+endocardial compartment, CDH5 traces almost the mirror image — high before
+EndMT, dips exactly when FBN1/2/3 are rising through EndMT, then both
+converge high once the mesenchymal/endothelial compartments re-separate
+after cushion formation. This is expected biology (EndMT is *defined* by
+losing endothelial junctions and gaining mesenchymal ECM machinery) rather
+than a new finding, but it's a useful sanity check that the qualitative
+model behaves consistently across genes with opposite roles.
+
+Same caveats apply as the fibrillin data (ordinal/literature-derived, not
+measured counts) — see [Caveats](#caveats) below.
+
 ## Caveats
 
 - Values are ordinal, literature-derived estimates, not measured expression;
